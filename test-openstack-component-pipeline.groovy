@@ -64,7 +64,7 @@ node {
     sh("mkdir -p ${testOutputDir}")
 
     stage('Get tests artifacts') {
-        selector = [$class: 'SpecificBuildSelector', buildNumber: deployBuildNumber];
+        selector = [$class: 'SpecificBuildSelector', buildNumber: "${deployBuildNumber}"];
 
         step ([$class: 'CopyArtifact',
                projectName: deployJobName,
