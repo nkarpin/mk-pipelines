@@ -36,8 +36,8 @@ def uploadResultsTestrail(report, image, testGroup, credentialsId, plan, milesto
 }
 
 node {
-    def cred = common.getCredentials(CREDENTIALS_ID, 'key')
-    def gerritChange = gerrit.getGerritChange(cred.username, GERRIT_HOST, GERRIT_CHANGE_NUMBER, CREDENTIALS_ID, true)
+    //def cred = common.getCredentials(CREDENTIALS_ID, 'key')
+    //def gerritChange = gerrit.getGerritChange(cred.username, GERRIT_HOST, GERRIT_CHANGE_NUMBER, CREDENTIALS_ID, true)
     def deployJobName = STACK_DEPLOY_JOB
     def deployBuild
     def deployBuildNumber
@@ -46,8 +46,16 @@ node {
     stage('Trigger deploy job') {
         deployBuild = build(job: "${deployJobName}", parameters: [
             [$class: 'StringParameterValue', name: 'OPENSTACK_API_PROJECT', value: 'mcp-oscore'],
-            [$class: 'StringParameterValue', name: 'STACK_TEST', value: ''],
-            [$class: 'BooleanParameterValue', name: 'TEST_DOCKER_INSTALL', value: false]
+            [$class: 'StringParameterValue', name: 'STACK_TEST', value: 'openstack'],
+            [$class: 'StringParameterValue', name: 'TEST_TEMPEST_IMAGE', value: 'sandriichenko/rally_tempest_docker:docker_aio'],
+           // [$class: 'StringParameterValue', name: 'TEST_TEMPEST_PATTERN', value: '63dc64e6-2e79-4fdf-868f-85500d308d66'],
+            [$class: 'StringParameterValue', name: 'TEST_TEMPEST_PATTERN', value: 'set=smoke'],
+            [$class: 'StringParameterValue', name: 'TEST_TEMPEST_TARGET', value: 'cfg*'],
+            [$class: 'StringParameterValue', name: 'STACK_INSTALL', value: 'core,openstack'],
+            [$class: 'StringParameterValue', name: 'STACK_TYPE', value: 'heat'],
+            [$class: 'StringParameterValue', name: 'SALT_MASTER_URL', value: ''],
+            [$class: 'BooleanParameterValue', name: 'STACK_DELETE', value: false],
+            [$class: 'BooleanParameterValue', name: 'TEST_DOCKER_INSTALL', value: true]
         ])
     }
 
