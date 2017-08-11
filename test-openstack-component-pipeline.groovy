@@ -14,6 +14,27 @@
 def common = new com.mirantis.mk.Common()
 def gerrit = new com.mirantis.mk.Gerrit()
 
+def uploadResultsTestrail(report, image, testGroup, credentialsId, plan, milestone, suite, type = 'sh', master = null, target = null) {
+    def salt = new com.mirantis.mk.Salt()
+    def common = new com.mirantis.mk.Common()
+    creds = common.getPasswordCredentials(credentialsId)
+    command =  "docker run --rm --net=host " +
+                           "-v ${report}:/srv/report.xml " +
+                           "-e TESTRAIL_USER=${creds.username} " +
+                           "-e PASS=${creds.password.toString()} " +
+                           "-e TESTRAIL_PLAN_NAME=${plan} " +
+                           "-e TESTRAIL_MILESTONE=${milestone} " +
+                           "-e TESTRAIL_SUITE=${suite} " +
+                           "-e SHORT_TEST_GROUP=${testGroup} " +
+                           "${image}"
+    if (type == 'sh') {
+      sh("${command}")
+    }
+    if (type == 'salt') {
+      salt.cmdRun(master, "${target}", "${command}")
+    }
+}
+
 node {
     def cred = common.getCredentials(CREDENTIALS_ID, 'key')
     def gerritChange = gerrit.getGerritChange(cred.username, GERRIT_HOST, GERRIT_CHANGE_NUMBER, CREDENTIALS_ID, true)
