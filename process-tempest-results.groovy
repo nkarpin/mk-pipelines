@@ -47,7 +47,7 @@ node("python") {
         if (TESTRAIL.toBoolean() == true) {
             stage('Upload tests results to Testrail'){
 
-                def plan = TEST_PLAN ?: "${MILESTONE}-${TEST_MODEL}-${OPENSTACK_VERSION}-${TEST_DATE}-JOBDEBUG"
+                def plan = TEST_PLAN ?: "${TEST_MILESTONE}-${TEST_MODEL}-${OPENSTACK_VERSION}-${TEST_DATE}-JOBDEBUG"
                 def group = TEST_GROUP ?: "${TEST_MODEL}-${TEST_SUITE}-JOBDEBUG"
 
                 test.uploadResultsTestrail(reportPath, TEST_REPORTER_IMAGE, group, TESTRAIL_QA_CREDENTIALS,
