@@ -8,6 +8,7 @@
  *   TEST_TEMPEST_IMAGE           Docker image to run tempest
  *   TEST_TEMPEST_TARGET          Salt target to run tempest on
  *   TEST_TEMPEST_PATTERN         Tests to execute
+ *   TEST_DOCKER_INSTALL          Whether install docker
  *   TESTRAIL                     Whether upload results to testrail or not
  *   TEST_MILESTONE               Product version for tests
  *   TEST_MODEL                   Salt model used in environment

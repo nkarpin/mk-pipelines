@@ -45,7 +45,7 @@ node {
             def gerritChange = gerrit.getGerritChange(cred.username, GERRIT_HOST, GERRIT_CHANGE_NUMBER, CREDENTIALS_ID, true)
             def testrail = false
         } else {
-            def testrail = TESTRAIL.toBoolean()
+            def testrail = TESTRAIL
         }
 
         stage('Trigger deploy job') {
@@ -86,7 +86,7 @@ node {
                 [$class: 'StringParameterValue', name: 'TEST_MILESTONE', value: MILESTONE],
                 [$class: 'StringParameterValue', name: 'TEST_MODEL', value: TEST_MODEL],
                 [$class: 'StringParameterValue', name: 'OPENSTACK_VERSION', value: OPENSTACK_VERSION],
-                [$class: 'BooleanParameterValue', name: 'TESTRAIL', value: testrail],
+                [$class: 'BooleanParameterValue', name: 'TESTRAIL', value: testrail.toBoolean()],
                 [$class: 'StringParameterValue', name: 'COMPONENT', value: COMPONENT]
             ])
         }
