@@ -37,7 +37,7 @@ node("python") {
         def artifacts_dir = '_artifacts/'
         def log_dir = "/home/rally/rally_reports/${COMPONENT}"
         def reports_dir = "/root/rally_reports/${COMPONENT}"
-        def date = sh(script: "date +%Y-%m-%d", returnStdout: true)
+        def date = sh(script: "date +%Y-%m-%d", returnStdout: true).trim()
 
         if (common.checkContains('TEST_DOCKER_INSTALL', 'true')) {
             test.install_docker(saltMaster, TEST_TEMPEST_TARGET)

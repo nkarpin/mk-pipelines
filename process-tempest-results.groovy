@@ -48,7 +48,7 @@ node("python") {
             stage('Upload tests results to Testrail'){
 
                 def plan = TEST_PLAN ?: "${TEST_MILESTONE}-${TEST_MODEL}-${OPENSTACK_VERSION}-${TEST_DATE}-JOBDEBUG"
-                def group = TEST_GROUP ?: "${TEST_MODEL}-${TEST_SUITE}-JOBDEBUG"
+                def group = TEST_GROUP ?: "${TEST_MODEL}-JOBDEBUG"
 
                 test.uploadResultsTestrail(reportPath, TEST_REPORTER_IMAGE, group, TESTRAIL_QA_CREDENTIALS,
                     plan, TEST_MILESTONE, TEST_SUITE)
