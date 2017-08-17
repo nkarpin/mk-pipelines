@@ -9,7 +9,8 @@
  *   FORMULAS_REVISION                 Salt formulas version
  *   FORMULAS_SOURCE                   Where to install formulas from
  *   GERRIT_CHECK                      Is this build is triggered by gerrit
- *_  MILESTONE                         MCP version
+ *   HEAT_STACK_ZONE                   VM availability zone
+ *   MILESTONE                         MCP version
  *   OPENSTACK_VERSION                 Version of Openstack being tested
  *   OPENSTACK_API_URL                 OpenStack API address
  *   OPENSTACK_API_CREDENTIALS         Credentials to the OpenStack API
@@ -51,7 +52,8 @@ node("python") {
 
         stage('Trigger deploy job') {
             deployBuild = build(job: STACK_DEPLOY_JOB, parameters: [
-                [$class: 'StringParameterValue', name: 'OPENSTACK_API_PROJECT', value: 'mcp-oscore'],
+                [$class: 'StringParameterValue', name: 'OPENSTACK_API_PROJECT', value: OPENSTACK_API_PROJECT],
+                [$class: 'StringParameterValue', name: 'HEAT_STACK_ZONE', value: HEAT_STACK_ZONE],
                 [$class: 'StringParameterValue', name: 'STACK_INSTALL', value: 'core,openstack,ovs'],
                 [$class: 'StringParameterValue', name: 'STACK_TEST', value: ''],
                 [$class: 'StringParameterValue', name: 'STACK_TYPE', value: STACK_TYPE],
