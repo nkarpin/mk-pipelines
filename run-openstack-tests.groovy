@@ -61,7 +61,7 @@ node("python") {
                 [$class: 'StringParameterValue', name: 'TEST_MILESTONE', value: TEST_MILESTONE],
                 [$class: 'StringParameterValue', name: 'TEST_MODEL', value: TEST_MODEL],
                 [$class: 'StringParameterValue', name: 'OPENSTACK_VERSION', value: OPENSTACK_VERSION],
-                [$class: 'StringParameterValue', name: 'TEST_DATE', value: date]
+                [$class: 'StringParameterValue', name: 'TEST_DATE', value: date],
                 [$class: 'BooleanParameterValue', name: 'FAIL_ON_TESTS', value: FAIL_ON_TESTS.toBoolean()]
             ])
         }

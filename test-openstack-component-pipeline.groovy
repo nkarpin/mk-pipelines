@@ -1,7 +1,7 @@
 /**
-
+ *
  * Launch system tests against new package.
-
+ *
  * Flow parameters:
  *   CREDENTIALS_ID                    ID of gerrit credentials
  *   COMPONENT                         Openstack component to test
@@ -31,9 +31,8 @@
  *   TEST_TEMPEST_TARGET               Salt target for tempest tests
  *   TEST_TEMPEST_PATTERN              Tempest tests pattern
  *   TEST_MODEL                        Reclass model of environment
-
-
-**/
+ *
+ **/
 def common = new com.mirantis.mk.Common()
 def gerrit = new com.mirantis.mk.Gerrit()
 
@@ -57,7 +56,7 @@ node("python") {
                 [$class: 'StringParameterValue', name: 'STACK_TEST', value: ''],
                 [$class: 'StringParameterValue', name: 'STACK_TYPE', value: STACK_TYPE],
                 [$class: 'BooleanParameterValue', name: 'STACK_DELETE', value: false],
-                [$class: 'TextParameterValue', name: 'SALT_OVERRIDES', value: SALT_OVERRIDES],
+                [$class: 'TextParameterValue', name: 'SALT_OVERRIDES', value: SALT_OVERRIDES]
             ])
         }
 
@@ -92,8 +91,8 @@ node("python") {
                 [$class: 'StringParameterValue', name: 'TEST_MODEL', value: TEST_MODEL],
                 [$class: 'StringParameterValue', name: 'OPENSTACK_VERSION', value: OPENSTACK_VERSION],
                 [$class: 'BooleanParameterValue', name: 'TESTRAIL', value: testrail.toBoolean()],
-                [$class: 'StringParameterValue', name: 'COMPONENT', value: COMPONENT]
-                [$class: 'BooleanParameterValue', name: 'FAIL_ON_TESTS', value: GERRIT_CHECK.toboolean]
+                [$class: 'StringParameterValue', name: 'COMPONENT', value: COMPONENT],
+                [$class: 'BooleanParameterValue', name: 'FAIL_ON_TESTS', value: GERRIT_CHECK.toBoolean()]
             ])
         }
     } catch (Throwable e) {
