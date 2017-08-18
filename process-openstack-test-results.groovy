@@ -49,7 +49,7 @@ node("docker") {
         if (TESTRAIL.toBoolean() == true) {
             stage('Upload tests results to Testrail'){
 
-                def plan = TEST_PLAN ?: "${MILESTONE}-${TEST_MODEL}-${OPENSTACK_VERSION}-${TEST_DATE}"
+                def plan = TEST_PLAN ?: "${TEST_MILESTONE}-${TEST_MODEL}-${OPENSTACK_VERSION}-${TEST_DATE}"
                 def group = TEST_GROUP ?: "${TEST_MODEL}"
 
                 test.uploadResultsTestrail(reportPath, TEST_REPORTER_IMAGE, group, TESTRAIL_QA_CREDENTIALS,
