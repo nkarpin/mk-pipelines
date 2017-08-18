@@ -53,7 +53,7 @@ node("docker") {
                 def group = TEST_GROUP ?: "${TEST_MODEL}"
 
                 //ensures that we have up to date image on jenkins slave
-                sh("doker pull $(TEST_REPORTER_IMAGE)")
+                sh("doker pull ${TEST_REPORTER_IMAGE}")
 
                 test.uploadResultsTestrail(reportPath, TEST_REPORTER_IMAGE, group, TESTRAIL_QA_CREDENTIALS,
                     plan, TEST_MILESTONE, TEST_SUITE)
